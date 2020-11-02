@@ -8,7 +8,7 @@ Android-ci-docker is a [Docker](https://www.docker.com) images meant to serve as
 <a name="whats_included"></a>
 ### What's included?
 
-*Android-ci-docker is built on top of circleci images: [Circle-Ci_Android](https://github.com/CircleCI-Public/circleci-dockerfiles/tree/master/android/images).
+*Android-ci-docker* is built on top of circleci images: [Circle-Ci-Android](https://github.com/CircleCI-Public/circleci-dockerfiles/tree/master/android/images).
 
 <a name="how_to_use"></a>
 ### How to use?
@@ -22,7 +22,7 @@ Android-ci-docker is a [Docker](https://www.docker.com) images meant to serve as
 
 If you need to maintain different images for your project, i.e target for different Android APIs,
 1. Create a new folder `android-api-{version-number}`
-2. Create a new Dockerfile inside your new folder. You can copy the Dockerfile from existing folders or from [Circle-Ci_Android](https://github.com/CircleCI-Public/circleci-dockerfiles/tree/master/android/images)
+2. Create a new Dockerfile inside your new folder. You can copy the Dockerfile from existing folders or from [Circle-Ci-Android](https://github.com/CircleCI-Public/circleci-dockerfiles/tree/master/android/images)
 3. Make sure you edit the java version to `openjdk:8-jdk-slim` and build-tools version for your targeted SDK.
 4. Edit your circle ci config to targetyour new folder. 
 
