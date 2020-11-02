@@ -1,0 +1,33 @@
+version: 2.1
+jobs:
+  build:
+    working_directory: /app
+    docker:
+      - image: docker:18.06.1-ce-git
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Setup custom environment variables
+          command: |
+            echo 'export ANDROID_REPO="$DOCKER_USERNAME/android-ci"' >> $BASH_ENV
+      - run:
+          name: Build Docker image
+          command: |
+            source $BASH_ENV
+            export TAG=`if [ "$CIRCLE_BRANCH" == "master" ]; then echo "api-29"; else echo $CIRCLE_BRANCH ; fi`
+            docker build -t $ANDROID_REPO:$CIRCLE_BUILD_NUM -t $ANDROID_REPO:$TAG ./android-api-29
+      - deploy:
+          name: Push Docker image
+          command: |
+            source $BASH_ENV
+            echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+            docker push $ANDROID_REPO
+workflows:
+  version: 2.1
+  build-deploy:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: master
