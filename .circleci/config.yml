@@ -10,12 +10,12 @@ jobs:
       - run:
           name: Setup custom environment variables
           command: |
-            echo 'export ANDROID_REPO="$DOCKER_USERNAME/android-ci"' >> $BASH_ENV
+            echo 'export ANDROID_REPO="$DOCKER_USERNAME/android-ci-api-29"' >> $BASH_ENV
       - run:
           name: Build Docker image
           command: |
             source $BASH_ENV
-            export TAG=`if [ "$CIRCLE_BRANCH" == "master" ]; then echo "api-29"; else echo $CIRCLE_BRANCH ; fi`
+            export TAG=`if [ "$CIRCLE_BRANCH" == "master" ]; then echo "latest"; else echo $CIRCLE_BRANCH ; fi`
             docker build -t $ANDROID_REPO:$CIRCLE_BUILD_NUM -t $ANDROID_REPO:$TAG ./android-api-29
       - deploy:
           name: Push Docker image
